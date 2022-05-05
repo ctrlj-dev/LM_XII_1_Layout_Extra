@@ -1,0 +1,24 @@
+@mixin border($borderWidth) {
+  border: $borderWidth solid $lightBlack;
+}
+
+@mixin inputSearch {
+  @include border($lightBordersWidth);
+  padding: $buttonPading;
+  font-weight: $fontBold;
+  color: $lightBlack;
+  text-transform: uppercase;
+  &::placeholder {
+    color: $lightBlack;
+    opacity: 1;
+    text-transform: uppercase;
+    font-weight: $fontBold;
+  }
+}
+
+@mixin containerBorder($bgColor, $borderWidth) {
+    @include border($borderWidth);
+    padding: $containerPading;
+    margin: $bigBaseMargin;
+    background: $bgColor;
+}
