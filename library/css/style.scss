@@ -48,6 +48,24 @@ $containerPading: 15px;
   }
 }
 
+@keyframes colorRoulette {
+  0% {
+    color: $yellow;
+  }
+  25% {
+    color: $blue;
+  }
+  50% {
+    color: $red;
+  }
+  75% {
+    color: $white;
+  }
+  100% {
+    color: $lightBlack;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -58,9 +76,11 @@ body {
 }
 
 .container-fluid {
-  max-width: 90%;
-  padding: 0 15px;
   margin: 0 auto;
+  @media #{$m768} {
+    max-width: 90%;
+    padding: 0 15px;
+  }
 }
 
 .container {
@@ -102,7 +122,37 @@ input[type="search"] {
 header {
   margin: $bigBaseMargin;
   .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
+    .input-container,
+    .user-name {
+      flex: 0 0 auto;
+      width: 100%;
+      @media #{$m768} {
+        width: 50%;
+      }
+    }
+    .user-name {
+      order: 1;
+      @media #{$m768} {
+        order: 2;
+        text-align: right;
+      }
+    }
+    .input-container {
+      order: 2;
+      @media #{$m768} {
+        order: 1;
+      }
+      input {
+        width: 100%;
+        @media #{$m768} {
+          width: auto;
+        }
+      }
+    }
   }
 }
 
@@ -112,24 +162,9 @@ header {
   text-transform: uppercase;
   h1 {
     margin: 0;
-  }
-}
-
-.marquee-container {
-  overflow: hidden;
-  max-width: 100%;
-  @include containerBorder($yellow, $HeavyBordersWidth);
-  .marquee {
-    max-width: 110%;
-    position: relative;
-    animation: scroll 20s linear infinite;
-    display: flex;
-    justify-content: space-between;
-    h1 {
-      flex: 0 0 25%;
-    }
-    :hover {
-      animation-play-state: paused;
+    font-size: 1.5em;
+    @media #{$m1400} {
+      font-size: 2em;
     }
   }
 }
@@ -189,12 +224,6 @@ body {
   font-family: $mainFont;
 }
 
-.container-fluid {
-  max-width: 90%;
-  padding: 0 15px;
-  margin: 0 auto;
-}
-
 .container {
   max-width: 100%;
   padding: 0 15px;
@@ -251,6 +280,12 @@ header {
   overflow: hidden;
   max-width: 100%;
   @include containerBorder($yellow, $HeavyBordersWidth);
+  margin: 0 auto;
+  border-top: none;
+  @media #{$m768} {
+    margin: $bigBaseMargin;
+    border-top: $HeavyBordersWidth solid;
+  }
   .marquee {
     max-width: 110%;
     position: relative;
@@ -258,7 +293,8 @@ header {
     display: flex;
     justify-content: space-between;
     h1 {
-      flex: 0 0 25%;
+      flex: 0 0 auto;
+      margin-right: 15px;
     }
     :hover {
       animation-play-state: paused;
@@ -273,16 +309,26 @@ header {
 nav {
   position: relative;
   max-width: 100%;
-  flex: 0 0 20%;
+  flex: 0 0 auto;
+  width: 100%;
   color: $lightBlack;
   font-weight: $fontBold;
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  @media #{$m992} {
+    width: 20%;
+    position: relative;
+  }
   .menu-container {
     @include containerBorder($blue, $HeavyBordersWidth);
     position: sticky;
     top: 0;
     width: 100%;
     max-width: 100%;
-    border-right: none;
+    @media #{$m992} {
+      border-right: none;
+    }
     .menu-title {
       font-weight: $fontBold;
       text-transform: uppercase;
@@ -290,21 +336,101 @@ nav {
     ul {
       margin: 0;
       padding: 0;
+      display: flex;
+      flex-wrap: wrap;
       li {
         list-style: none;
-        display: block;
-        margin-bottom: 15px;
-        background-color: $white;
+        display: inline-block;
         text-transform: uppercase;
         text-align: center;
-        @include containerBorder("transparent", $lightBordersWidth);
+        flex: 0 0 auto;
+        width: 24%;
+        font-size: 0.8rem;
+        @include containerBorder($red, $lightBordersWidth);
+        margin: 0 auto;
+        border-right: 5px solid;
+        border-bottom: 5px solid;
+        padding: 5px;
+        &:nth-child(2) {
+          background: $yellow;
+        }
+        &:nth-child(3) {
+          background: $pink;
+        }
+        &:nth-child(4) {
+          background: $white;
+        }
+        &:hover {
+          border-right: $lightBordersWidth solid;
+          border-bottom: $lightBordersWidth solid;
+          cursor: pointer;
+        }
+        @media #{$m992} {
+          width: 100%;
+          font-size: 1rem;
+          margin: 10px auto;
+        }
       }
     }
   }
 }
 
 main {
-  flex: 0 0 80%;
-  max-width: 80%;
+  flex: 0 0 auto;
+  width: 100%;
   @include containerBorder($white, $HeavyBordersWidth);
+  border-top: none;
+  @media #{$m992} {
+    width: 80%;
+    border-top: $HeavyBordersWidth solid;
+  }
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 15px;
+  row-gap: 15px;
+  .card {
+    flex: 0 0 auto;
+    width: 45%;
+    border: $lightBordersWidth solid $lightBlack;
+    border-right: 5px solid;
+    border-bottom: 5px solid;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    @media #{$m768} {
+      width: 33%;
+    }
+    @media #{$m1200} {
+      width: 20%;
+    }
+    &:hover {
+      border-right: $lightBordersWidth solid;
+      border-bottom: $lightBordersWidth solid;
+      cursor: pointer;
+    }
+    img,
+    .member-name {
+      flex: 0 0 auto;
+      width: 100%;
+      text-align: center;
+    }
+    img {
+      border-radius: 100%;
+      max-width: 150px;
+    }
+  }
+}
+
+footer {
+  margin: 30px auto;
+  text-align: center;
+  font-weight: bold;
+  animation: colorRoulette 3s infinite forwards;
+  @media #{$m992} {
+    margin-bottom: 0;
+  }
 }

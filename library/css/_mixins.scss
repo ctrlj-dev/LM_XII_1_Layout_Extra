@@ -14,11 +14,24 @@
     text-transform: uppercase;
     font-weight: $fontBold;
   }
+  border-right: 5px solid;
+  border-bottom: 5px solid;
+  &:hover {
+    border-right: $lightBordersWidth solid;
+    border-bottom: $lightBordersWidth solid;
+    cursor: pointer;
+  }
+  &:focus,
+  &:hover,
+  &:focus-visible,
+  &:focus-within,
+  &:active {
+    outline: none;
+  }
 }
 
 @mixin containerBorder($bgColor, $borderWidth) {
-    @include border($borderWidth);
-    padding: $containerPading;
-    margin: $bigBaseMargin;
-    background: $bgColor;
+  @include border($borderWidth);
+  padding: $containerPading;
+  background: $bgColor;
 }
